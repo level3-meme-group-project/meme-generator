@@ -43,7 +43,7 @@ class MemeGenerator extends Component {
         this.setState({currentImg: randMemeImg})
     }
 
-    //places eleemnts of meme into array for later access
+    //places elements of meme into array for later access
     handleSubmit(event){
         event.preventDefault();
         this.setState(prevState => {
