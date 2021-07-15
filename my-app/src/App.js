@@ -1,5 +1,5 @@
 import React from "react"
-// import Banner from "./Banner"
+import Banner from "./Banner"
 import MemeGenerator from "./MemeGenerator"
 import "./style.css"
 
@@ -7,7 +7,7 @@ import "./style.css"
 function App(){
     return (
         <div>
-            {/* <Banner /> */}
+            <Banner />
             <MemeGenerator />
         </div>
     )

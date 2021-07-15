@@ -3,13 +3,13 @@ import "./style.css"
 
 function Banner(){
     return (
-        <header>
+        <header >
             <img
                 className= "logo"
                 src="https://avatars.githubusercontent.com/u/17483941?s=200&v=4"
                 alt="didn't load"
                 />
-                <p>React Meme Generator</p>
+            <p>V School React Meme Generator</p>
         </header>
 
     )
