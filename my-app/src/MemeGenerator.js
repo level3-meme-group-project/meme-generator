@@ -1,98 +1,175 @@
-import React, {Component} from "react"
+import React, { Component } from "react"
 
 //Creates initial state 
 class MemeGenerator extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
-            topText: "",
-            bottomText: "",
-            currentImg:"https://phantom-marca.unidadeditorial.es/eef3aa47c3980d0760e9d5cf15860679/resize/1320/f/webp/assets/multimedia/imagenes/2020/11/27/16065165106560.jpg",
+            currentImg: "https://phantom-marca.unidadeditorial.es/eef3aa47c3980d0760e9d5cf15860679/resize/1320/f/webp/assets/multimedia/imagenes/2020/11/27/16065165106560.jpg",
             allMemeImgs: [],
-            allSavedMemes: []
+            allSavedMemes: [
+                {
+                    memeTopText: "Create your",
+                    memeBottomText: "own meme",
+                    memeImage: "https://phantom-marca.unidadeditorial.es/eef3aa47c3980d0760e9d5cf15860679/resize/1320/f/webp/assets/multimedia/imagenes/2020/11/27/16065165106560.jpg",
+                    editable: false
+                }
+            ]
 
         }
 
-        //Binds medthods that are created
+        //Binds methods that are created
         this.handleChange = this.handleChange.bind(this)
-        this.handleChangeImage = this.handleChangeImage.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.generateNewMeme = this.generateNewMeme.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
+        this.handleEdit = this.handleEdit.bind(this)
+        this.saveData = this.saveData.bind(this)
+        this.handleImageRefresh = this.handleImageRefresh.bind(this)
     }
 
     //Pulls API from imgflip.com and loads it into allMemeImgs state
-    componentDidMount(){
+    componentDidMount() {
         fetch(`https://api.imgflip.com/get_memes`)
-        .then(response => response.json())
-        .then(response => {
-            const {memes} = response.data
-            this.setState({ allMemeImgs: memes})
-        })
+            .then(response => response.json())
+            .then(response => {
+                const { memes } = response.data
+                this.setState({ allMemeImgs: memes })
+            })
     }
 
-    //Renders text immediatley into the dom and updates state - topText and bottomText
-    handleChange(event){
-        const {name, value} = event.target
-        this.setState({ [name]: value })
+    //update the meme objects topText and bottomText properties individually
+    handleChange(event) {
+        event.preventDefault();
+
+        const fieldName = event.target.name
+        const fieldValue = event.target.value
+
+        const newMemesArray = [...this.state.allSavedMemes];
+        const index = event.target.attributes.getNamedItem("memeindex").value;
+        if (fieldName === "topText") {
+            newMemesArray[index].memeTopText = fieldValue
+        }
+        else if (fieldName === "bottomText") {
+            newMemesArray[index].memeBottomText = fieldValue
+        }
+        this.setState({ allSavedMemes: newMemesArray })
+
+    }
+
+    //places elements of meme into array for later access
+    generateNewMeme(event) {
+        event.preventDefault();
+        this.setState(prevState => {
+
+            const newMeme = {
+                memeTopText: "",
+                memeBottomText: "",
+                memeImage: this.generateNewImage(),
+                editable: true
+
+            }
+
+            return ({ allSavedMemes: [...prevState.allSavedMemes, newMeme] })
+        })
     }
 
     //Creates a random number that is used to change url
-    handleChangeImage(event){
-        event.preventDefault()
+    generateNewImage() {
         const randNum = Math.floor(Math.random() * this.state.allMemeImgs.length)
         const randMemeImg = this.state.allMemeImgs[randNum].url
-        this.setState({currentImg: randMemeImg})
+        return randMemeImg
     }
 
-    //places eleemnts of meme into array for later access
-    handleSubmit(event){
+    //Deletes memes
+    handleDelete(event) {
         event.preventDefault();
-        this.setState(prevState => {
-            const finishedMeme = {
-                memeTopText: this.state.topText,
-                memeBottomText: this.state.bottomText,
-                memeImage: this.state.currentImg
-            }
-            return({allSavedMemes: [...prevState.allSavedMemes, finishedMeme]})
-        })
+        const newMemesArray = [...this.state.allSavedMemes];
+        const index = event.target.attributes.getNamedItem("memeindex").value
+        console.log(newMemesArray)
+        if (index !== -1) {
+            newMemesArray.splice(index, 1);
+            this.setState({ allSavedMemes: newMemesArray })
+        }
+    }
+
+    // viewing the final state here since you can't view state with re-rendering
+    viewFinalState() {
+        //console.log(this.state)
+    }
+
+    //edit text in memes
+
+    handleEdit(event) {
+        event.preventDefault();
+        const newMemesArray1 = [...this.state.allSavedMemes];
+        const index = event.target.attributes.getNamedItem("memeindex").value
+        newMemesArray1[index].editable = !newMemesArray1[index].editable
+        this.setState({ allSavedMemes: newMemesArray1 })
+    }
+
+    //save data 
+
+    saveData(event){
+        event.preventDefault();
+        const newMemesArray1 = [...this.state.allSavedMemes];
+        const index = event.target.attributes.getNamedItem("memeindex").value
+        newMemesArray1[index].editable = !newMemesArray1[index].editable
+        this.setState({ allSavedMemes: newMemesArray1 })
+
+
+    }
+
+    handleImageRefresh(event){
+        event.preventDefault()
+        const newMemesArray1 = [...this.state.allSavedMemes];
+        const index = event.target.attributes.getNamedItem("memeindex").value
+        newMemesArray1[index].memeImage = this.generateNewImage()
+        this.setState({ allSavedMemes: newMemesArray1 })
     }
 
     //Created inputs to collect topText and bottomText 
     //Creates buttons to access methods
-    render(){
-        return(
-            <div>
-            <form className="memeForm" onSubmit={this.handleSubmit}>
-                
-                <input
-                type="text"
-                name="topText"
-                placeholder="Top Text"
-                value={this.state.topText}
-                onChange={this.handleChange}
-                />
+    render() {
+        const memes = this.state.allSavedMemes.map((item, index) =>
 
-                <input
-                type="text"
-                name="bottomText"
-                placeholder="Bottom Text"
-                value={this.state.bottomText}
-                onChange={this.handleChange}
-                />
-                <br/>
-                <button>Add Meme to List</button>
-            </form>
-            <button onClick={this.handleChangeImage}>Refresh Meme Image</button>
-            <button>Edit Existing Meme</button>
-            <button>Delete Meme from List</button>
-                <div className="meme">
-                <img className="displayMeme" src={this.state.currentImg} alt="" />
-                <h2 className="top" >{this.state.topText}</h2>
-                <h2 className="bottom"> {this.state.bottomText}</h2>
-                </div>
+            <div className="meme" key={index}>
+                <img className="displayMeme" src={item.memeImage} alt="" />
+                <form id="my-form">
+                    <input type="text"
+                        name="topText"
+                        placeholder="Top Text"
+                        value={item.memeTopText}
+                        memeindex={index}
+                        onChange={this.handleChange}
+                        className="memeTextEdit memeTopText"
+                        disabled={!item.editable} />
+
+                    <input type="text"
+                        name="bottomText"
+                        placeholder="Bottom Text"
+                        value={item.memeBottomText}
+                        memeindex={index}
+                        onChange={this.handleChange}
+                        className="memeTextEdit memeBottomText"
+                        disabled={!item.editable} />
+
+                    <button className={"saveButton " + (item.editable ? 'show' : 'hidden')} memeindex={index} onClick={this.saveData}>Save Text</button>
+
+                </form>
+                <button className={"editButton " + (item.editable ? 'hidden' : 'show')} memeindex={index} onClick={this.handleEdit}>Edit Meme Text</button>
+                <button className={"imageRefreshButton " + (item.editable ? 'show' : 'hidden') } memeindex={index} onClick={this.handleImageRefresh}>Change Photo</button>
+                <button className="deleteMemeButton" memeindex={index} onClick={this.handleDelete}>Delete Meme</button>
             </div>
-        
         )
-        
+
+        return (
+            <div>
+                <button onClick={this.generateNewMeme} className="newMemeButton">Generate New Meme</button>
+                {memes}
+            </div>
+
+        )
+
     }
 }
 
