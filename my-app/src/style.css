@@ -6,6 +6,7 @@
     position: relative;
     width: 90%;
     margin: auto;
+    margin-bottom: 20px;
 }
 
 .meme > img {
@@ -48,4 +49,221 @@
   box-sizing: border-box;
   text-align: center;
   margin-left: 13%;
+}
+
+/* Meme input fields */
+
+input[type=text].memeTextEdit {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: impact, sans-serif;
+    font-size: 2em;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 1px;
+    text-align: center;
+    background-color: rgba(0,0,0,0.01);
+    border: none;
+    text-shadow:
+        2px 2px 0 #000,
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        0 2px 0 #000,
+        2px 0 0 #000,
+        0 -2px 0 #000,
+        -2px 0 0 #000,
+        2px 2px 5px #000
+}
+
+::placeholder {
+    color: white;
+    opacity: 0.5;
+    text-shadow:
+        2px 2px 0 #000,
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        0 2px 0 #000,
+        2px 0 0 #000,
+        0 -2px 0 #000,
+        -2px 0 0 #000,
+        2px 2px 5px #000
+}
+
+.memeTopText {
+    top: 10%;
+}
+
+.memeBottomText {
+    bottom: 15%;
+}
+
+.newMemeButton{
+    border: 1px solid transparent;
+    background-color: #0f62fe;
+    color: #fff;
+    text-align:center;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: .16px;
+    position: relative;
+    display: inline-flex;
+    max-width: 20rem;
+    min-height: 3rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(.875rem - 3px) 63px calc(.875rem - 3px) 15px;
+    margin: auto;
+    border-radius: 0;
+    cursor: pointer;
+    outline: none;
+    text-align: left;
+    text-decoration: none;
+    transition: background 70ms cubic-bezier(0,0,.38,.9),box-shadow 70ms cubic-bezier(0,0,.38,.9),border-color 70ms cubic-bezier(0,0,.38,.9),outline 70ms cubic-bezier(0,0,.38,.9);
+    vertical-align: top;
+}
+
+.deleteMemeButton {
+    border: 1px solid transparent;
+    background-color: #da1e28;
+    color: #fff;
+    box-sizing: border-box;
+    border: 0;
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: .16px;
+    position: relative;
+    display: inline-flex;
+    max-width: 20rem;
+    min-height: 3rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(.875rem - 3px) 63px calc(.875rem - 3px) 15px;
+    margin: 0;
+    border-radius: 0;
+    cursor: pointer;
+    outline: none;
+    text-align: left;
+    text-decoration: none;
+    transition: background 70ms cubic-bezier(0,0,.38,.9),box-shadow 70ms cubic-bezier(0,0,.38,.9),border-color 70ms cubic-bezier(0,0,.38,.9),outline 70ms cubic-bezier(0,0,.38,.9);
+    vertical-align: top;
+}
+
+.editButton {
+    border: 1px solid transparent;
+    background-color: #393939;
+    color: #fff;
+    box-sizing: border-box;
+    border: 0;
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: .16px;
+    position: relative;
+    display: inline-flex;
+    max-width: 20rem;
+    min-height: 3rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(.875rem - 3px) 63px calc(.875rem - 3px) 15px;
+    margin: 0;
+    border-radius: 0;
+    cursor: pointer;
+    outline: none;
+    text-align: left;
+    text-decoration: none;
+    transition: background 70ms cubic-bezier(0,0,.38,.9),box-shadow 70ms cubic-bezier(0,0,.38,.9),border-color 70ms cubic-bezier(0,0,.38,.9),outline 70ms cubic-bezier(0,0,.38,.9);
+    vertical-align: top;
+}
+
+.saveButton {
+    border: 1px solid #0f62fe;
+    background-color: transparent;
+    color: #0f62fe;
+    box-sizing: border-box;
+    border: 2px;
+    border-color: #0f62fe;
+    border-style: solid;
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: .16px;
+    position: relative;
+    display: inline-flex;
+    max-width: 20rem;
+    min-height: 3rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(.875rem - 3px) 63px calc(.875rem - 3px) 15px;
+    margin: 0;
+    border-radius: 0;
+    cursor: pointer;
+    outline: none;
+    text-align: left;
+    text-decoration: none;
+    transition: background 70ms cubic-bezier(0,0,.38,.9),box-shadow 70ms cubic-bezier(0,0,.38,.9),border-color 70ms cubic-bezier(0,0,.38,.9),outline 70ms cubic-bezier(0,0,.38,.9);
+    vertical-align: top;
+}
+
+.imageRefreshButton {
+    border: 1px solid #0f62fe;
+    background-color: transparent;
+    color: #0f62fe;
+    box-sizing: border-box;
+    border: 2px;
+    border-color: #0f62fe;
+    border-style: solid;
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: .16px;
+    position: relative;
+    display: inline-flex;
+    max-width: 20rem;
+    min-height: 3rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(.875rem - 3px) 63px calc(.875rem - 3px) 15px;
+    margin: 0;
+    border-radius: 0;
+    cursor: pointer;
+    outline: none;
+    text-align: left;
+    text-decoration: none;
+    transition: background 70ms cubic-bezier(0,0,.38,.9),box-shadow 70ms cubic-bezier(0,0,.38,.9),border-color 70ms cubic-bezier(0,0,.38,.9),outline 70ms cubic-bezier(0,0,.38,.9);
+    vertical-align: top;
+}
+
+
+.show{
+    display: inline-block;
+}
+
+.hidden{
+    display: none;
 }
